@@ -19,7 +19,7 @@ URLS = [
 OUTPUT_FILE = "merged_proxies.txt"
 
 # Флаги стран
-TARGET_FLAGS = ["🇵🇦", "🇸🇬", "🇨🇭","🇻🇬","🇮🇸"]
+TARGET_FLAGS = ["🇵🇦", "🇸🇬", "🇨🇭", "🇻🇬", "🇮🇸"]
 
 
 def fetch_content(url):
@@ -33,7 +33,6 @@ def fetch_content(url):
 
 
 def contains_target_flag(line):
-    # Декодируем URL-кодированные символы
     decoded_line = unquote(line)
     return any(flag in decoded_line for flag in TARGET_FLAGS)
 
@@ -67,6 +66,35 @@ def has_tls_or_reality_vmess(line):
         return False
 
 
+# --- НОВАЯ ФУНКЦИЯ ДЛЯ ДЕДУПЛИКАЦИИ ---
+def extract_host_port(line):
+    try:
+        if line.startswith("vmess://"):
+            encoded = line.replace("vmess://", "")
+            padded = encoded + "=" * (-len(encoded) % 4)
+            decoded = base64.b64decode(padded).decode("utf-8")
+            data = json.loads(decoded)
+
+            host = data.get("add")
+            port = str(data.get("port"))
+
+            if host and port:
+                return f"{host}:{port}"
+            return None
+
+        parsed = urlparse(line)
+        host = parsed.hostname
+        port = parsed.port
+
+        if host and port:
+            return f"{host}:{port}"
+
+    except Exception:
+        pass
+
+    return None
+
+
 def filter_line(line):
     line = line.strip()
     if not line:
@@ -98,12 +126,20 @@ def main():
         all_lines.extend(lines)
 
     filtered = [line for line in all_lines if filter_line(line)]
-    unique_lines = sorted(set(filtered))
+
+    # --- ДЕДУПЛИКАЦИЯ ПО HOST:PORT ---
+    unique_servers = {}
+    for line in filtered:
+        key = extract_host_port(line)
+        if key and key not in unique_servers:
+            unique_servers[key] = line
+
+    unique_lines = sorted(unique_servers.values())
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         f.write("\n".join(unique_lines))
 
-    print(f"Готово. Записано {len(unique_lines)} строк.")
+    print(f"Готово. Записано {len(unique_lines)} уникальных серверов.")
     print(f"Время обновления: {datetime.utcnow()} UTC")
 
 
