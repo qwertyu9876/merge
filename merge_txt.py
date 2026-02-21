@@ -66,9 +66,9 @@ def has_tls_or_reality_vmess(line):
         return False
 
 
-# --- НОВАЯ ФУНКЦИЯ ДЛЯ ДЕДУПЛИКАЦИИ ---
 def extract_host_port(line):
     try:
+        # -------- VMESS --------
         if line.startswith("vmess://"):
             encoded = line.replace("vmess://", "")
             padded = encoded + "=" * (-len(encoded) % 4)
@@ -82,6 +82,25 @@ def extract_host_port(line):
                 return f"{host}:{port}"
             return None
 
+        # -------- SHADOWSOCKS --------
+        if line.startswith("ss://"):
+            content = line.replace("ss://", "").split("#")[0]
+
+            # если есть @ — значит часть уже декодирована
+            if "@" in content:
+                userinfo, server = content.split("@", 1)
+            else:
+                # нужно декодировать base64
+                padded = content + "=" * (-len(content) % 4)
+                decoded = base64.b64decode(padded).decode("utf-8")
+                if "@" not in decoded:
+                    return None
+                userinfo, server = decoded.split("@", 1)
+
+            host, port = server.split(":")
+            return f"{host}:{port}"
+
+        # -------- ОСТАЛЬНЫЕ ПРОТОКОЛЫ --------
         parsed = urlparse(line)
         host = parsed.hostname
         port = parsed.port
