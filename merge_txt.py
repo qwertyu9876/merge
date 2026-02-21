@@ -1,7 +1,7 @@
 import requests
 import base64
 import json
-from urllib.parse import urlparse, parse_qs
+from urllib.parse import urlparse, parse_qs, unquote
 from datetime import datetime
 
 URLS = [
@@ -17,6 +17,9 @@ URLS = [
 
 OUTPUT_FILE = "merged_proxies.txt"
 
+# Флаги стран
+TARGET_FLAGS = ["🇵🇦", "🇸🇬", "🇨🇭"]
+
 
 def fetch_content(url):
     try:
@@ -26,6 +29,12 @@ def fetch_content(url):
     except Exception as e:
         print(f"Ошибка при скачивании {url}: {e}")
         return []
+
+
+def contains_target_flag(line):
+    # Декодируем URL-кодированные символы
+    decoded_line = unquote(line)
+    return any(flag in decoded_line for flag in TARGET_FLAGS)
 
 
 def has_tls_or_reality_vless(line):
@@ -62,6 +71,10 @@ def filter_line(line):
     if not line:
         return False
 
+    # Проверка флага страны
+    if not contains_target_flag(line):
+        return False
+
     if line.startswith("vless://"):
         return has_tls_or_reality_vless(line)
 
@@ -71,7 +84,7 @@ def filter_line(line):
     if line.startswith("trojan://"):
         return has_tls_or_reality_trojan(line)
 
-    # Остальные протоколы оставляем
+    # Остальные протоколы (например ss://, hy2://, tuic://)
     return True
 
 
