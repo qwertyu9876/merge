@@ -19,7 +19,7 @@ URLS = [
 OUTPUT_FILE = "merged_proxies.txt"
 
 # Флаги стран
-TARGET_FLAGS = ["🇵🇦", "🇸🇬", "🇨🇭"]
+TARGET_FLAGS = ["🇵🇦", "🇸🇬", "🇨🇭","🇻🇬","🇮🇸"]
 
 
 def fetch_content(url):
