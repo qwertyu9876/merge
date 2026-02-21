@@ -14,6 +14,7 @@ URLS = [
     "https://raw.githubusercontent.com/wiki/gfpcom/free-proxy-list/lists/trojan.txt",
     "https://raw.githubusercontent.com/wiki/gfpcom/free-proxy-list/lists/tuic.txt",
     "https://raw.githubusercontent.com/wiki/gfpcom/free-proxy-list/lists/vmess.txt",
+    "https://raw.githubusercontent.com/wiki/gfpcom/free-proxy-list/lists/vless.txt",
 ]
 
 OUTPUT_FILE = "merged_proxies.txt"
