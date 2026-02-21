@@ -1,4 +1,7 @@
 import requests
+import base64
+import json
+from urllib.parse import urlparse, parse_qs
 from datetime import datetime
 
 URLS = [
@@ -14,6 +17,7 @@ URLS = [
 
 OUTPUT_FILE = "merged_proxies.txt"
 
+
 def fetch_content(url):
     try:
         response = requests.get(url, timeout=30)
@@ -23,6 +27,54 @@ def fetch_content(url):
         print(f"Ошибка при скачивании {url}: {e}")
         return []
 
+
+def has_tls_or_reality_vless(line):
+    parsed = urlparse(line)
+    params = parse_qs(parsed.query)
+    security = params.get("security", [""])[0].lower()
+    return security in ["tls", "reality"]
+
+
+def has_tls_or_reality_trojan(line):
+    parsed = urlparse(line)
+    params = parse_qs(parsed.query)
+    security = params.get("security", [""])[0].lower()
+    return security in ["tls", "reality"]
+
+
+def has_tls_or_reality_vmess(line):
+    try:
+        encoded = line.replace("vmess://", "")
+        padded = encoded + "=" * (-len(encoded) % 4)
+        decoded = base64.b64decode(padded).decode("utf-8")
+        data = json.loads(decoded)
+
+        tls_value = str(data.get("tls", "")).lower()
+        security_value = str(data.get("security", "")).lower()
+
+        return tls_value in ["tls", "reality"] or security_value in ["tls", "reality"]
+    except Exception:
+        return False
+
+
+def filter_line(line):
+    line = line.strip()
+    if not line:
+        return False
+
+    if line.startswith("vless://"):
+        return has_tls_or_reality_vless(line)
+
+    if line.startswith("vmess://"):
+        return has_tls_or_reality_vmess(line)
+
+    if line.startswith("trojan://"):
+        return has_tls_or_reality_trojan(line)
+
+    # Остальные протоколы оставляем
+    return True
+
+
 def main():
     all_lines = []
 
@@ -31,14 +83,15 @@ def main():
         lines = fetch_content(url)
         all_lines.extend(lines)
 
-    # Удаляем пустые строки и дубликаты
-    unique_lines = sorted(set(line.strip() for line in all_lines if line.strip()))
+    filtered = [line for line in all_lines if filter_line(line)]
+    unique_lines = sorted(set(filtered))
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         f.write("\n".join(unique_lines))
 
     print(f"Готово. Записано {len(unique_lines)} строк.")
     print(f"Время обновления: {datetime.utcnow()} UTC")
+
 
 if __name__ == "__main__":
     main()
