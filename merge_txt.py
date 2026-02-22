@@ -167,7 +167,18 @@ def main():
         if key and key not in unique_servers:
             unique_servers[key] = line
 
-    unique_lines = sorted(unique_servers.values())
+    def protocol_priority(line):
+        if line.startswith("vless://"):
+            return (0, line)
+        if line.startswith("trojan://"):
+            return (1, line)
+        if line.startswith("vmess://"):
+            return (2, line)
+        if line.startswith("ss://"):
+            return (3, line)
+        return (4, line)  # остальные протоколы
+    
+    unique_lines = sorted(unique_servers.values(), key=protocol_priority)
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         f.write("\n".join(unique_lines))
