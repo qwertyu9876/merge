@@ -33,6 +33,20 @@ def fetch_content(url):
 
 
 def contains_target_flag(line):
+    # ---- VMESS ----
+    if line.startswith("vmess://"):
+        try:
+            encoded = line.replace("vmess://", "")
+            padded = encoded + "=" * (-len(encoded) % 4)
+            decoded = base64.b64decode(padded).decode("utf-8")
+            data = json.loads(decoded)
+
+            ps = str(data.get("ps", ""))
+            return any(flag in ps for flag in TARGET_FLAGS)
+        except Exception:
+            return False
+
+    # ---- Остальные ----
     decoded_line = unquote(line)
     return any(flag in decoded_line for flag in TARGET_FLAGS)
 
