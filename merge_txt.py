@@ -37,11 +37,11 @@ def contains_target_flag(line):
     return any(flag in decoded_line for flag in TARGET_FLAGS)
 
 
-def has_tls_or_reality_vless(line):
+def has_reality_vless(line):
     parsed = urlparse(line)
     params = parse_qs(parsed.query)
     security = params.get("security", [""])[0].lower()
-    return security in ["tls", "reality"]
+    return security in ["reality"]
 
 
 def has_tls_or_reality_trojan(line):
@@ -124,7 +124,7 @@ def filter_line(line):
         return False
 
     if line.startswith("vless://"):
-        return has_tls_or_reality_vless(line)
+        return has_reality_vless(line)
 
     if line.startswith("vmess://"):
         return has_tls_or_reality_vmess(line)
