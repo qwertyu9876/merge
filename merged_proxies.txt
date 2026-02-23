@@ -1,16 +1,16 @@
 vless://0a21d713-6e6f-4274-8b84-464019325513@208.69.78.5:443?security=reality&encryption=none&sni=www.microsoft.com&fp=chrome&pbk=vMBfs89AZ02R1ggA45SqOFLfe6rJQ0_mLBpsV97k3zA&sid=9c8d68d581a08ea5&type=grpc&serviceName=ecb7f0f50489f81cd1983a56&path=/#🇨🇭 Switzerland | Ontario 1
 vless://2ab537a3-484b-4546-b3f9-42524fdc7ce9@84.234.28.75:8276?security=reality&encryption=none&pbk=34tAykdTer8UPMP8u4yK9oOWG0qaoRp91Ge_yqTsKiw&headerType=none&fp=firefox&type=tcp&sni=aparat.com&sid=11fc5f260a203f63#%F0%9F%87%A8%F0%9F%87%AD%20Switzerland%2C%20Geneva%20%7C%20%F0%9F%8C%90%20%7C%20%5BIPv4%2B6%5D%20%7C%20%5BBL%5D
 vless://7c3f08c8-7b3b-4028-91d8-378a18c2b62a@185.227.149.123:443?encryption=none&flow=xtls-rprx-vision&fp=qq&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&security=reality&sid=6ba85179e30d4fc2&sni=mycatcollection.com&type=tcp#🇨🇭 Switzerland | Digitale Suisse AG 1
-vless://8338171d-2ea7-4015-bdea-492f3d5d4e60@5.182.36.56:45886?security=reality&encryption=none&pbk=zJeLZDPHoHMcAzBJh38tSavofNlkBrpADFx9jVVPil0&headerType=none&fp=chrome&spx=%2F&type=tcp&sni=yahoo.com&sid=94f9#%5BOpenRay%5D%20%F0%9F%87%A8%F0%9F%87%AD%20CH-6
+vless://80edbcfe-a5dd-4efc-b494-dc1b7aa5b9a3@45.141.119.180:8443?encryption=none&flow=xtls-rprx-vision&fp=qq&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&security=reality&sid=6ba85179e30d4fc2&sni=ign.dev&type=tcp#🇨🇭 Switzerland | Julian Achter 1
+vless://8338171d-2ea7-4015-bdea-492f3d5d4e60@5.182.36.56:45886?encryption=none&security=reality&sni=yahoo.com&fp=chrome&pbk=zJeLZDPHoHMcAzBJh38tSavofNlkBrpADFx9jVVPil0&sid=94f9&spx=%2F&type=tcp&headerType=none#🇨🇭 Switzerland | WorkTitans B.V. 2
 vless://c3dd7afc-151f-44f6-8263-ad3c8420ae2f@45.83.21.107:59997?security=reality&encryption=none&pbk=m4ipEx1PUfb6F5Uv5Mwe5g34TzdNkG_rIQ0xw-Do1mI&headerType=none&fp=chrome&spx=/@V2WRAY-@V2WRAY-@V2WRAY-@V2WRAY-@V2WRAY-@V2WRAY-@V2WRAY-@V2WRAY-@V2WRAY-@V2WRAY-@V2WRAY-@V2WRAY-@V2WRAY-@V2WRAY-@V2WRAY-@V2WRAY-@V2WRAY-@V2WRAY-@V2WRAY-@V2WRAY-?ed=2560&type=tcp&sni=yahoo.com&sid=816473be23c2#🇮🇸 Iceland | WorkTitans B.V. 1
-vless://d7dbeb1e-268c-465c-8f59-489f14703efd@5.182.36.251:16331?security=reality&encryption=none&pbk=wYtc0dMr5fw5bBQkbLNpTqtu0m4B9NKnOyEWjRJUmzk&headerType=&fp=chrome&type=tcp&sni=yahoo.com&sid=910aab#🇨🇭 Switzerland | WorkTitans B.V. 1
-vless://e96b31ba-7120-45a0-abfc-c5611049af75@84.234.29.143:2087?encryption=none&fp=chrome&pbk=7s9-nH4hYMtQH5vUCzUFEeyGsb6WCl2E4Qgk13R80A0&security=reality&sid=f85554dfada636a4&sni=play.google.com&type=tcp#🇨🇭 Switzerland | Infomaniak Network SA 27
-vless://e96b31ba-7120-45a0-abfc-c5611049af75@ae-rlt.hexo-music.ir:2087?security=reality&encryption=none&pbk=7s9-nH4hYMtQH5vUCzUFEeyGsb6WCl2E4Qgk13R80A0&headerType=none&fp=chrome&type=tcp&sni=play.google.com&sid=f85554dfada636a4#🇨🇭 Switzerland | Infomaniak Network SA 28
+vless://d7dbeb1e-268c-465c-8f59-489f14703efd@5.182.36.251:16331?encryption=none&security=reality&sni=yahoo.com&fp=chrome&pbk=wYtc0dMr5fw5bBQkbLNpTqtu0m4B9NKnOyEWjRJUmzk&sid=910aab&type=tcp&headerType=none#🇨🇭 Switzerland | WorkTitans B.V. 1
+vless://e96b31ba-7120-45a0-abfc-c5611049af75@84.234.29.143:2087?encryption=none&fp=chrome&pbk=7s9-nH4hYMtQH5vUCzUFEeyGsb6WCl2E4Qgk13R80A0&security=reality&sid=f85554dfada636a4&sni=play.google.com&type=tcp#%5BOpenRay%5D%20%F0%9F%87%A8%F0%9F%87%AD%20CH-81
 vless://f248fc61-7b39-4348-974c-105ee340bb27@che01-plr-vlr01.tcp-reset-club.net:443/?type=tcp&encryption=none&flow=xtls-rprx-vision&sni=hls-svod.itunes.apple.com&fp=chrome&security=reality&pbk=mLmBhbVFfNuo2eUgBh6r9-5Koz9mUCn3aSzlR6IejUg&sid=175d#%5BOpenRay%5D%20%F0%9F%87%A8%F0%9F%87%AD%20CH-70
 trojan://0ab6c98dae3b48e8b9c4a776b6c9c19a@139.59.119.143:443?security=tls&sni=connectwithemployers.online&allowInsecure=1&fp=chrome&type=tcp#%F0%9F%87%B8%F0%9F%87%AC%20Singapore%20-%20Singapore%20%F0%9F%8C%8F%20TR-TCP-TLS%204%E2%83%A3
 trojan://16132fb0-4945-11f0-a95e-1239d0255272@91.192.81.167:443?security=tls&sni=sg4.6n6.net&type=tcp&allowInsecure=1#%F0%9F%94%92%20TR-TCP-TLS%20%F0%9F%87%B8%F0%9F%87%AC%20SG-91.192.81.167:443
 trojan://860deb50-4945-11f0-97d9-1239d0255272@103.253.24.248:443?security=tls&sni=sg2.6n6.net&type=tcp#%F0%9F%94%92%20TR-TCP-TLS%20%F0%9F%87%B8%F0%9F%87%AC%20SG-103.253.24.248:443
-trojan://8aab51da-6b67-4bd2-b6e6-5ab3008cf53e@13.76.251.170:443?security=tls&sni=jp.iamnotagoodman.com&type=tcp&allowInsecure=1#%F0%9F%94%92%20TR-TCP-TLS%20%F0%9F%87%B8%F0%9F%87%AC%20SG-13.76.251.170:443
+trojan://87d1bfd4-574e-4c96-ad42-0426f27461ff@mfa.gov.ua:443/?type=tcp&security=tls#%F0%9F%87%B8%F0%9F%87%AC%23ShineNET%20VPN%20%2828%29
 trojan://8jqRgpyc5lEe34TzC9A8DuFD23aS3ZyCleIFuCxp3xOYnZRCeA3Oc3yCga8C2DKYBDaRp@18.141.138.96:443?security=tls&sni=mention.protocolbuffer.com&allowInsecure=1&fp=chrome&type=tcp#%F0%9F%87%B8%F0%9F%87%AC%20Singapore%20-%20Singapore%20%F0%9F%8C%8F%20TR-TCP-TLS%204%E2%83%A3
 trojan://Aimer@206.238.236.16:443?security=tls&sni=ngepx.ambercc.filegear-sg.me&type=tcp#%F0%9F%94%92%20TR-TCP-TLS%20%F0%9F%87%B8%F0%9F%87%AC%20SG-206.238.236.16:443
 trojan://Aimer@206.238.236.252:2096?security=tls&sni=ngepx.ambercc.filegear-sg.me&type=tcp#%F0%9F%94%92%20TR-TCP-TLS%20%F0%9F%87%B8%F0%9F%87%AC%20SG-206.238.236.252:2096
@@ -40,7 +40,7 @@ trojan://d446ca24-80b7-4e4a-8055-e23838e43705@cdnfire.xiaomispeed.com:23301/?typ
 trojan://d4bdfc72-7f0c-4ff0-aa4d-3530736f4088@159.223.42.224:443?security=tls&sni=sg-full.privateip.net&allowInsecure=1&fp=chrome&type=tcp#%F0%9F%87%B8%F0%9F%87%AC%20Singapore%20-%20Singapore%20%F0%9F%8C%8F%20TR-TCP-TLS%204%E2%83%A3
 trojan://dc54abbf-0b35-4e01-8aee-3fa16cc677bd@188.166.189.168:443?security=tls&sni=aka.ms&type=tcp#%F0%9F%94%92%20TR-TCP-TLS%20%F0%9F%87%B8%F0%9F%87%AC%20SG-188.166.189.168:443
 trojan://installshield@38.180.249.177:8443?security=tls&sni=38.180.249.177&allowInsecure=1&fp=chrome&type=tcp#%F0%9F%87%B8%F0%9F%87%AC%20Singapore%20-%20Singapore%20%F0%9F%8C%8F%20TR-TCP-TLS%204%E2%83%A3
-trojan://qmBSKnAl6LYi9%3Dz23Rs.Z@37.235.49.209:28099?security=tls&insecure=0&headerType=none&type=tcp&allowInsecure=0&sni=celestialcorset.crystalhamster.click#🇮🇸 Iceland | Advania Island ehf 1
+trojan://qmBSKnAl6LYi9%3Dz23Rs.Z@37.235.49.209:28099?security=tls&sni=celestialcorset.crystalhamster.click&fp=chrome&insecure=1&allowInsecure=1&type=tcp&headerType=none#🇮🇸 Iceland | Advania Island ehf 1
 trojan://trojan@ip.sb:8443/?type=tcp&security=tls#%F0%9F%87%B8%F0%9F%87%AC%23ShineNET%20VPN%20(29)
 trojan://ttfang@128.199.237.143:443?security=tls&sni=ttfang.fange.me&type=ws&host=ttfang.fange.me&path=%2F#%F0%9F%94%92%20TR-WS-TLS%20%F0%9F%87%B8%F0%9F%87%AC%20SG-128.199.237.143:443
 trojan://ttfang@129.150.50.21:44009?security=tls&sni=ttfang.fange.me&type=ws&host=ttfang.fange.me&path=%2F&allowInsecure=1#%F0%9F%94%92%20TR-WS-TLS%20%F0%9F%87%B8%F0%9F%87%AC%20SG-129.150.50.21:44009
@@ -66,13 +66,14 @@ vmess://eyJhZGQiOiIxMjguMTk5LjEyOC4xMTciLCJhaWQiOjAsImhvc3QiOiJzZy5kYWx4eS5ldS5v
 vmess://eyJhZGQiOiIxMjguMTk5LjI0My4xNTciLCJ2IjoyLCJwcyI6IvCfh7jwn4esX1NHX+aWsOWKoOWdoV83IiwicG9ydCI6IjgwODAiLCJpZCI6ImJkZDIyODQxLWM0ZDItNGFhOC1hY2YyLTk1YWE5MTI1ZjE1OSIsImFpZCI6IjAiLCJzY3kiOiJhdXRvIiwibmV0Ijoid3MiLCJ0eXBlIjoiIiwidGxzIjoidGxzIiwicGF0aCI6Ii8ifQ==
 vmess://eyJhZGQiOiIxNzIuMjM2LjE1NC41MCIsImFpZCI6MCwiaG9zdCI6InNnLmRhbHh5LmV1Lm9yZyIsImlkIjoiYTg4YTcxZmEtZWQ3Yy00OGQzLTg5ZTAtNzRhMDBkNjA1ZDg4IiwibmV0Ijoid3MiLCJwYXRoIjoiYTg4YTcxZmEtZWQ3Yy00OGQzLTg5ZTAtNzRhMDBkNjA1ZDg4LXZtIiwicG9ydCI6NDQzLCJwcyI6IvCfh7rwn4e4X1VTX+e+juWbvS0+8J+HuPCfh6xfU0df5paw5Yqg5Z2hIiwic2VjdXJpdHkiOiJhdXRvIiwic25pIjoic2cuZGFseHkuZXUub3JnIiwidGxzIjoidGxzIn0=
 vmess://eyJhZGQiOiJjZi4wOTAyMjcueHl6IiwiYWlkIjowLCJob3N0Ijoic2dhbC5kYWdyYXRlLmV1Lm9yZyIsImlkIjoiMjkwY2M2OTEtM2FjNi00Mzg3LTk4YTEtMjVjOGViOGNhMmVhIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsInBvcnQiOjQ0MywicHMiOiJodHRwczovL3QubWUvRm9yY2VSdW5WUE4t8J+HuPCfh6wtU2luZ2Fwb3JlLTkyMDFtcy1BbGliYWJhIENsb3VkIChTaW5nYXBvcmUpIFByaXZhdGUgTGltaXRlZCIsInNlY3VyaXR5IjoiYXV0byIsInNraXAtY2VydC12ZXJpZnkiOmZhbHNlLCJzbmkiOiJzZ2FsLmRhZ3JhdGUuZXUub3JnIiwidGxzIjoidGxzIiwidHlwZSI6ImF1dG8ifQ==
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo0MmQyYjQ3MTgxYTMyZGU3@154.26.132.38:16922#🇸🇬 Singapore | Cogent Communications 2
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo0MmQyYjQ3MTgxYTMyZGU3@154.26.132.38:16922#🇸🇬 Singapore | Cogent Communications 1
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo3NjRhNGQ4YzFjNzZlYjUwQDE5NC4yMzMuNzMuNTE6MTQ0NTM=#%5BOpenRay%5D%20%F0%9F%87%B8%F0%9F%87%AC%20SG-161
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo3YWZhMzkwMTZkNWE0MDljQDE5NC4yMzMuNzMuNTE6NDg4MDE=#%5BOpenRay%5D%20%F0%9F%87%B8%F0%9F%87%AC%20SG-162
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo3YWZhMzkwMTZkNWE0MDljQDE5NC4yMzMuNzMuNTE6NDg4MDI=#%5BOpenRay%5D%20%F0%9F%87%B8%F0%9F%87%AC%20SG-155
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo3YWZhMzkwMTZkNWE0MDljQDE5NC4yMzMuNzMuNTE6NDg4MDM=#%5BOpenRay%5D%20%F0%9F%87%B8%F0%9F%87%AC%20SG-163
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo3YWZhMzkwMTZkNWE0MDljQDE5NC4yMzMuNzMuNTE6NDg4MDQ=#%5BOpenRay%5D%20%F0%9F%87%B8%F0%9F%87%AC%20SG-164
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpBUmd2R1p5d0ErZ2FjZ0dWMjZCdm11MDUrd1ptUlcvaitBZFUrWjhCdDQ0PQ@38.89.142.56:990#🇸🇬 Singapore | Ultahost, 1
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpBUmd2R1p5d0ErZ2FjZ0dWMjZCdm11MDUrd1ptUlcvaitBZFUrWjhCdDQ0PQ==@38.89.142.56:990#🇸🇬 Singapore | Ultahost, 1
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpBUmd2R1p5d0ErZ2FjZ0dWMjZCdm11MDUrd1ptUlcvaitBZFUrWjhCdDQ0PQ@38.247.64.176:990#🇸🇬 Singapore | Ultahost, 2
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpBUmd2R1p5d0ErZ2FjZ0dWMjZCdm11MDUrd1ptUlcvaitBZFUrWjhCdDQ0PUAxMzguMTg2LjE0Mi44MDo5OTA=#%5BOpenRay%5D%20%F0%9F%87%B5%F0%9F%87%A6%20PA-1
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpBUmd2R1p5d0ErZ2FjZ0dWMjZCdm11MDUrd1ptUlcvaitBZFUrWjhCdDQ0PUAxMzguMTg2LjE0Mi44MTo5OTA=#%5BOpenRay%5D%20%F0%9F%87%B5%F0%9F%87%A6%20PA-2
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpkZWQ3MThmY2IyYmIxN2I3QDE1NC4yNi4xMzIuMzg6Mjc4ODM=#%5BOpenRay%5D%20%F0%9F%87%B8%F0%9F%87%AC%20SG-110
@@ -80,7 +81,7 @@ ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpkZWQ3MThmY2IyYmIxN2I3QDE1NC4yNi4xMzIuMzg6Mjc
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpsanFkYWx1MTMuLkAzLjEuMTk1LjE0ODo4MzE2#%5BOpenRay%5D%20%F0%9F%87%B8%F0%9F%87%AC%20SG-116
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpsanFkYWx1MTMuLkAzLjEuMTk1LjE0ODo4MzE5#%5BOpenRay%5D%20%F0%9F%87%B8%F0%9F%87%AC%20SG-118
 ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpsanFkYWx1MTMuLkAzLjEuMTk1LjE0ODo4MzEz#%5BOpenRay%5D%20%F0%9F%87%B8%F0%9F%87%AC%20SG-117
-ss://YWVzLTI1Ni1nY206OHQyeGVlbVV0eXVpNHpBdg==@194.233.94.119:80#🇸🇬 Singapore | Contabo Asia Private 3
-ss://YWVzLTI1Ni1nY206OHQyeGVlbVV0eXVpNHpBdg@194.233.94.119:443#🇸🇬 Singapore | Contabo Asia Private 1
-ss://YWVzLTI1Ni1nY206cUt2Zlg3eVFuVDk5T011Mw@194.233.75.190:80#🇸🇬 Singapore | Contabo Asia Private 4
-ss://cmM0LW1kNToxNGZGUHJiZXpFM0hEWnpzTU9yNg==@68.183.227.4:8080#🇸🇬 Singapore | DigitalOcean, 1
+ss://YWVzLTI1Ni1nY206OHQyeGVlbVV0eXVpNHpBdg==@194.233.94.119:80#🇸🇬 Singapore | Contabo Asia Private 2
+ss://YWVzLTI1Ni1nY206OHQyeGVlbVV0eXVpNHpBdg@194.233.94.119:443#🇸🇬 Singapore | Contabo Asia Private 3
+ss://YWVzLTI1Ni1nY206cUt2Zlg3eVFuVDk5T011Mw@194.233.75.190:80#🇸🇬 Singapore | Contabo Asia Private 1
+ss://cmM0LW1kNToxNGZGUHJiZXpFM0hEWnpzTU9yNg==@68.183.227.4:8080#🇸🇬 Singapore | DigitalOcean, 2
