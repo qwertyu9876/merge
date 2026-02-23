@@ -15,7 +15,6 @@ URLS = [
     "https://raw.githubusercontent.com/wiki/gfpcom/free-proxy-list/lists/vmess.txt",
     "https://raw.githubusercontent.com/sakha1370/OpenRay/refs/heads/main/output/all_valid_proxies.txt",
     "https://raw.githubusercontent.com/seknei3/psychic-fiestas/refs/heads/main/vpn.txt",
-    "https://github.com/seknei3/psychic-fiestas/raw/refs/heads/main/bobi_vpn.txt",
 ]
 
 OUTPUT_FILE = "merged_proxies.txt"
