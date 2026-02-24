@@ -12,6 +12,12 @@ URLS = [
     "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-SNI-RU-all.txt",
     "https://raw.githubusercontent.com/sakha1370/OpenRay/refs/heads/main/output/all_valid_proxies.txt",
 ]
+# Разрешённые шифры Shadowsocks 2022
+ALLOWED_SS_CIPHERS = [
+    "2022-blake3-aes-128-gcm",
+    "2022-blake3-aes-256-gcm",
+    "2022-blake3-chacha20-poly1305",
+]
 
 OUTPUT_FILE = "merged_proxies.txt"
 
@@ -76,6 +82,29 @@ def has_tls_or_reality_vmess(line):
     except Exception:
         return False
 
+def has_allowed_ss_cipher(line):
+    try:
+        if not line.startswith("ss://"):
+            return False
+
+        content = line.replace("ss://", "").split("#")[0]
+
+        # Если строка уже в формате method:pass@host:port
+        if "@" in content:
+            userinfo = content.split("@", 1)[0]
+        else:
+            padded = content + "=" * (-len(content) % 4)
+            decoded = base64.b64decode(padded).decode("utf-8")
+            if "@" not in decoded:
+                return False
+            userinfo = decoded.split("@", 1)[0]
+
+        method = userinfo.split(":")[0].lower()
+
+        return method in ALLOWED_SS_CIPHERS
+
+    except Exception:
+        return False
 
 def extract_host_port(line):
     try:
@@ -143,8 +172,12 @@ def filter_line(line):
     if line.startswith("trojan://"):
         return has_tls_or_reality_trojan(line)
 
-    # Остальные протоколы (например ss://, hy2://, tuic://)
-    return True
+    # ----- SHADOWSOCKS -----
+    if line.startswith("ss://"):
+        return has_allowed_ss_cipher(line)
+
+    # Остальные протоколы не нужны
+    return False
 
 
 def main():
