@@ -161,8 +161,8 @@ def filter_line(line):
         return False
 
     # Проверка флага страны
-    #if not contains_target_flag(line):
-    #    return False
+    if not contains_target_flag(line):
+        return False
 
     if line.startswith("vless://"):
         return has_reality_vless(line)
