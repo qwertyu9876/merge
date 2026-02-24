@@ -11,6 +11,7 @@ URLS = [
     "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-all.txt",
     "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-SNI-RU-all.txt",
     "https://raw.githubusercontent.com/sakha1370/OpenRay/refs/heads/main/output/all_valid_proxies.txt",
+    "https://raw.githubusercontent.com/wiki/gfpcom/free-proxy-list/lists/ss.txt",
 ]
 # Разрешённые шифры Shadowsocks 2022
 ALLOWED_SS_CIPHERS = [
