@@ -5,7 +5,13 @@ from urllib.parse import urlparse, parse_qs, unquote
 from datetime import datetime
 
 URLS = [
-    "https://raw.githubusercontent.com/4n0nymou3/multi-proxy-config-fetcher/refs/heads/main/configs/xray_secure_loadbalanced_config.json",
+    "https://github.com/seknei3/psychic-fiestas/raw/refs/heads/main/vpn_renamed.txt",
+    "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/BLACK_VLESS_RUS.txt",
+    "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/BLACK_SS+All_RUS.txt",
+    "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-all.txt",
+    "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-SNI-RU-all.txt",
+    "https://raw.githubusercontent.com/4n0nymou3/multi-proxy-config-fetcher/refs/heads/main/configs/proxy_configs_tested.txt",
+    "https://raw.githubusercontent.com/sakha1370/OpenRay/refs/heads/main/output/all_valid_proxies.txt",
 ]
 # Разрешённые шифры Shadowsocks 2022
 ALLOWED_SS_CIPHERS = [
@@ -24,44 +30,7 @@ def fetch_content(url):
     try:
         response = requests.get(url, timeout=30)
         response.raise_for_status()
-
-        content_type = response.headers.get("Content-Type", "").lower()
-
-        # --- ЕСЛИ JSON ---
-        if "application/json" in content_type or url.lower().endswith(".json"):
-            try:
-                data = response.json()
-
-                lines = []
-
-                # если это список
-                if isinstance(data, list):
-                    for item in data:
-                        if isinstance(item, str):
-                            lines.append(item)
-                        else:
-                            lines.append(json.dumps(item, ensure_ascii=False))
-
-                # если это словарь
-                elif isinstance(data, dict):
-                    for key, value in data.items():
-                        if isinstance(value, str):
-                            lines.append(value)
-                        else:
-                            lines.append(json.dumps(value, ensure_ascii=False))
-
-                else:
-                    lines.append(str(data))
-
-                return lines
-
-            except Exception as e:
-                print(f"Ошибка обработки JSON {url}: {e}")
-                return []
-
-        # --- ОБЫЧНЫЙ TXT ---
         return response.text.splitlines()
-
     except Exception as e:
         print(f"Ошибка при скачивании {url}: {e}")
         return []
