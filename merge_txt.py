@@ -1,8 +1,13 @@
 import requests
 import base64
 import json
+import socket
+import uuid
+import ipaddress
 from urllib.parse import urlparse, parse_qs, unquote
 from datetime import datetime
+
+# ---------------- НАСТРОЙКИ ----------------
 
 URLS = [
     "https://github.com/seknei3/psychic-fiestas/raw/refs/heads/main/vpn_renamed.txt",
@@ -13,210 +18,275 @@ URLS = [
     "https://raw.githubusercontent.com/4n0nymou3/multi-proxy-config-fetcher/refs/heads/main/configs/proxy_configs_tested.txt",
     "https://raw.githubusercontent.com/sakha1370/OpenRay/refs/heads/main/output/all_valid_proxies.txt",
 ]
-# Разрешённые шифры Shadowsocks 2022
+
+TARGET_FLAGS = ["🇵🇦", "🇨🇭", "🇻🇬", "🇮🇸"]
+
 ALLOWED_SS_CIPHERS = [
     "2022-blake3-aes-128-gcm",
     "2022-blake3-aes-256-gcm",
     "2022-blake3-chacha20-poly1305",
 ]
 
+ALLOWED_VM_CIPHERS = [
+    "auto",
+    "aes-128-gcm",
+    "chacha20-poly1305",
+]
+
+ALLOWED_ALPN = ["h2", "http/1.1"]
+WEAK_PORTS = {"21", "23", "25", "110"}
+
 OUTPUT_FILE = "merged_proxies.txt"
 
-# Флаги стран
-TARGET_FLAGS = ["🇵🇦", "🇨🇭", "🇻🇬", "🇮🇸"]
+# ---------------- УТИЛИТЫ ----------------
 
+def is_valid_uuid(val):
+    try:
+        uuid.UUID(val)
+        return True
+    except:
+        return False
+
+def is_private_ip(host):
+    try:
+        ip = ipaddress.ip_address(host)
+        return ip.is_private
+    except:
+        return False
+
+def is_valid_domain(host):
+    return host and "." in host and not host.replace(".", "").isdigit()
+
+def port_open(host, port):
+    try:
+        with socket.create_connection((host, int(port)), timeout=3):
+            return True
+    except:
+        return False
 
 def fetch_content(url):
     try:
-        response = requests.get(url, timeout=30)
-        response.raise_for_status()
-        return response.text.splitlines()
+        r = requests.get(url, timeout=30)
+        r.raise_for_status()
+        return r.text.splitlines()
     except Exception as e:
-        print(f"Ошибка при скачивании {url}: {e}")
+        print(f"Ошибка загрузки {url}: {e}")
         return []
 
+# ---------------- ПРОВЕРКИ ----------------
 
 def contains_target_flag(line):
-    # ---- VMESS ----
     if line.startswith("vmess://"):
         try:
             encoded = line.replace("vmess://", "")
+            if len(encoded) > 5000:
+                return False
             padded = encoded + "=" * (-len(encoded) % 4)
-            decoded = base64.b64decode(padded).decode("utf-8")
+            decoded = base64.b64decode(padded).decode()
             data = json.loads(decoded)
-
-            ps = str(data.get("ps", ""))
-            return any(flag in ps for flag in TARGET_FLAGS)
-        except Exception:
+            return any(flag in str(data.get("ps", "")) for flag in TARGET_FLAGS)
+        except:
             return False
 
-    # ---- Остальные ----
-    decoded_line = unquote(line)
-    return any(flag in decoded_line for flag in TARGET_FLAGS)
+    return any(flag in unquote(line) for flag in TARGET_FLAGS)
 
+# ---------- VLESS ----------
 
-def has_reality_vless(line):
+def validate_vless(line):
     parsed = urlparse(line)
     params = parse_qs(parsed.query)
+
+    host = parsed.hostname
+    port = str(parsed.port) if parsed.port else None
+    user = parsed.username
+
+    if not host or not port:
+        return False
+
+    if port in WEAK_PORTS:
+        return False
+
+    if is_private_ip(host):
+        return False
+
+    if not is_valid_uuid(user):
+        return False
+
+    if params.get("allowInsecure", ["0"])[0] == "1":
+        return False
+
     security = params.get("security", [""])[0].lower()
-    return security in ["reality"]
+    if security not in ["tls", "reality"]:
+        return False
 
+    if security == "reality":
+        if not params.get("pbk") or not params.get("sni"):
+            return False
 
-def has_tls_or_reality_trojan(line):
-    parsed = urlparse(line)
-    params = parse_qs(parsed.query)
-    security = params.get("security", [""])[0].lower()
-    return security in ["tls", "reality"]
+    alpn = params.get("alpn", [""])[0]
+    if alpn and alpn not in ALLOWED_ALPN:
+        return False
 
+    return port_open(host, port)
 
-def has_tls_or_reality_vmess(line):
+# ---------- VMESS ----------
+
+def validate_vmess(line):
     try:
         encoded = line.replace("vmess://", "")
-        padded = encoded + "=" * (-len(encoded) % 4)
-        decoded = base64.b64decode(padded).decode("utf-8")
-        data = json.loads(decoded)
-
-        tls_value = str(data.get("tls", "")).lower()
-        security_value = str(data.get("security", "")).lower()
-
-        return tls_value in ["tls", "reality"] or security_value in ["tls", "reality"]
-    except Exception:
-        return False
-
-def has_allowed_ss_cipher(line):
-    try:
-        if not line.startswith("ss://"):
+        if len(encoded) > 5000:
             return False
 
-        content = line.replace("ss://", "").split("#")[0]
+        padded = encoded + "=" * (-len(encoded) % 4)
+        decoded = base64.b64decode(padded).decode()
+        data = json.loads(decoded)
 
-        # Если строка уже в формате method:pass@host:port
-        if "@" in content:
-            userinfo = content.split("@", 1)[0]
-        else:
-            padded = content + "=" * (-len(content) % 4)
-            decoded = base64.b64decode(padded).decode("utf-8")
-            if "@" not in decoded:
-                return False
-            userinfo = decoded.split("@", 1)[0]
+        host = data.get("add")
+        port = str(data.get("port"))
+        uuid_val = data.get("id")
+        cipher = data.get("scy", "auto").lower()
+        tls_val = str(data.get("tls", "")).lower()
+        security = str(data.get("security", "")).lower()
 
-        method = userinfo.split(":")[0].lower()
+        if not host or not port:
+            return False
 
-        return method in ALLOWED_SS_CIPHERS
+        if port in WEAK_PORTS:
+            return False
 
-    except Exception:
+        if is_private_ip(host):
+            return False
+
+        if not is_valid_uuid(uuid_val):
+            return False
+
+        if cipher not in ALLOWED_VM_CIPHERS:
+            return False
+
+        if tls_val not in ["tls", "reality"] and security not in ["tls", "reality"]:
+            return False
+
+        return port_open(host, port)
+
+    except:
         return False
 
-def extract_host_port(line):
+# ---------- TROJAN ----------
+
+def validate_trojan(line):
+    parsed = urlparse(line)
+    params = parse_qs(parsed.query)
+
+    host = parsed.hostname
+    port = str(parsed.port) if parsed.port else None
+
+    if not host or not port:
+        return False
+
+    if port in WEAK_PORTS:
+        return False
+
+    if is_private_ip(host):
+        return False
+
+    if params.get("allowInsecure", ["0"])[0] == "1":
+        return False
+
+    security = params.get("security", ["tls"])[0].lower()
+    if security not in ["tls", "reality"]:
+        return False
+
+    return port_open(host, port)
+
+# ---------- SHADOWSOCKS ----------
+
+def validate_ss(line):
     try:
-        # -------- VMESS --------
-        if line.startswith("vmess://"):
-            encoded = line.replace("vmess://", "")
-            padded = encoded + "=" * (-len(encoded) % 4)
-            decoded = base64.b64decode(padded).decode("utf-8")
-            data = json.loads(decoded)
+        content = line.replace("ss://", "").split("#")[0]
 
-            host = data.get("add")
-            port = str(data.get("port"))
+        if "@" not in content:
+            padded = content + "=" * (-len(content) % 4)
+            decoded = base64.b64decode(padded).decode()
+        else:
+            decoded = content
 
-            if host and port:
-                return f"{host}:{port}"
-            return None
+        if "@" not in decoded:
+            return False
 
-        # -------- SHADOWSOCKS --------
-        if line.startswith("ss://"):
-            content = line.replace("ss://", "").split("#")[0]
+        userinfo, server = decoded.split("@", 1)
+        method = userinfo.split(":")[0].lower()
+        host, port = server.split(":")
 
-            # если есть @ — значит часть уже декодирована
-            if "@" in content:
-                userinfo, server = content.split("@", 1)
-            else:
-                # нужно декодировать base64
-                padded = content + "=" * (-len(content) % 4)
-                decoded = base64.b64decode(padded).decode("utf-8")
-                if "@" not in decoded:
-                    return None
-                userinfo, server = decoded.split("@", 1)
+        if method not in ALLOWED_SS_CIPHERS:
+            return False
 
-            host, port = server.split(":")
-            return f"{host}:{port}"
+        if port in WEAK_PORTS:
+            return False
 
-        # -------- ОСТАЛЬНЫЕ ПРОТОКОЛЫ --------
-        parsed = urlparse(line)
-        host = parsed.hostname
-        port = parsed.port
+        if is_private_ip(host):
+            return False
 
-        if host and port:
-            return f"{host}:{port}"
+        return port_open(host, port)
 
-    except Exception:
-        pass
+    except:
+        return False
 
-    return None
-
+# ---------------- ОСНОВНОЙ ФИЛЬТР ----------------
 
 def filter_line(line):
     line = line.strip()
     if not line:
         return False
 
-    # Проверка флага страны
     if not contains_target_flag(line):
         return False
 
     if line.startswith("vless://"):
-        return has_reality_vless(line)
+        return validate_vless(line)
 
     if line.startswith("vmess://"):
-        return has_tls_or_reality_vmess(line)
+        return validate_vmess(line)
 
     if line.startswith("trojan://"):
-        return has_tls_or_reality_trojan(line)
+        return validate_trojan(line)
 
-    # ----- SHADOWSOCKS -----
     if line.startswith("ss://"):
-        return has_allowed_ss_cipher(line)
+        return validate_ss(line)
 
-    # Остальные протоколы не нужны
     return False
 
+# ---------------- MAIN ----------------
+
+def extract_host_port(line):
+    try:
+        parsed = urlparse(line)
+        return f"{parsed.hostname}:{parsed.port}"
+    except:
+        return None
 
 def main():
     all_lines = []
 
     for url in URLS:
         print(f"Скачивание: {url}")
-        lines = fetch_content(url)
-        all_lines.extend(lines)
+        all_lines.extend(fetch_content(url))
 
+    print("Фильтрация...")
     filtered = [line for line in all_lines if filter_line(line)]
 
-    # --- ДЕДУПЛИКАЦИЯ ПО HOST:PORT ---
-    unique_servers = {}
+    unique = {}
     for line in filtered:
         key = extract_host_port(line)
-        if key and key not in unique_servers:
-            unique_servers[key] = line
+        if key and key not in unique:
+            unique[key] = line
 
-    def protocol_priority(line):
-        if line.startswith("vless://"):
-            return (0, line)
-        if line.startswith("trojan://"):
-            return (1, line)
-        if line.startswith("vmess://"):
-            return (2, line)
-        if line.startswith("ss://"):
-            return (3, line)
-        return (4, line)  # остальные протоколы
-    
-    unique_lines = sorted(unique_servers.values(), key=protocol_priority)
+    result = sorted(unique.values())
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        f.write("\n".join(unique_lines))
+        f.write("\n".join(result))
 
-    print(f"Готово. Записано {len(unique_lines)} уникальных серверов.")
+    print(f"Готово. Уникальных серверов: {len(result)}")
     print(f"Время обновления: {datetime.utcnow()} UTC")
-
 
 if __name__ == "__main__":
     main()
