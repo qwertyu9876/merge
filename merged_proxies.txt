@@ -1,3 +1,7 @@
+tuic://aea65e62-056d-49e4-b097-cb978f176430:aea65e62-056d-49e4-b097-cb978f176430@107.175.51.245:40001
+tuic://6b389472-9094-4c8a-a780-3d371b2eade5:6b389472-9094-4c8a-a780-3d371b2eade5@45.76.82.254:35403
+tuic://87bc1693-8860-41d7-acf4-e6edf49abbbb:crivAv10hAdr-fop4Lne@70.34.197.98:443
+tuic://aea65e62-056d-49e4-b097-cb978f176430:aea65e62-056d-49e4-b097-cb978f176430@nat3.reconv.pl:5432
 hysteria2://03573f46-e944-11eb-a8bf-f23c91cfbbc9@9bc9db69-t6t0g0-tee612-2r82.hk1.hyhuawei.com:443?insecure=1&sni=9bc9db69-t6t0g0-tee612-2r82.hk1.hyhuawei.com#%F0%9F%87%AD%F0%9F%87%B0%20Hong%20Kong%2C%20Central%20%7C%20%5BBL%5D
 hysteria2://03573f46-e944-11eb-a8bf-f23c91cfbbc9@9bc9db69-t6t0g0-tee612-2r82.hk1.hyhuawei.com:443?security=tls&amp;insecure=1&amp;mport=30000-60000&amp;sni=9bc9db69-t6t0g0-tee612-2r82.hk1.hyhuawei.com#%F0%9F%87%AD%F0%9F%87%B0%20Hong%20Kong%2C%20Central%20%7C%20%5BBL%5D
 hysteria2://03573f46-e944-11eb-a8bf-f23c91cfbbc9@9bc9db69-t6t0g0-tee612-2r82.hk1.hyhuawei.com:443?security=tls&insecure=1&mport=30000-60000&sni=9bc9db69-t6t0g0-tee612-2r82.hk1.hyhuawei.com#%F0%9F%87%AD%F0%9F%87%B0%20Hong%20Kong%2C%20Central%20%7C%20%5BBL%5D
@@ -35,3 +39,10 @@ hysteria2://b58095f0-52dc-11ef-bc74-f23c91cfbbc9@38a8754f-t6pb40-tmynyz-1s3mx.hk
 hysteria2://4d5018bf-0e8b-4087-8b8a-bfa51ae86f5c@160.16.137.28:35789?security=tls&insecure=0&sni=iij.mggl.wang#%F0%9F%87%AF%F0%9F%87%B5%20Japan%20%7C%20%F0%9F%8C%90%20%7C%20%5BIPv6%5D%20%7C%20%5BBL%5D
 hysteria2://2c833c5d-cbcc-4afb-89ba-d17dc39db6f0@75.127.13.83:47974/?insecure=1&sni=www.bing.com#%F0%9F%87%BA%F0%9F%87%B8%20United%20States%2C%20Seattle%20%7C%20%5BBL%5D
 hysteria2://2c833c5d-cbcc-4afb-89ba-d17dc39db6f0@75.127.13.83:47974?security=tls&insecure=1&sni=www.bing.com#%F0%9F%87%BA%F0%9F%87%B8%20United%20States%2C%20Seattle%20%7C%20%5BBL%5D
+anytls://06c625ea-5902-11ee-9e87-f23c9313b177@3ad20e82-tb71c0-tbomae-4mce.hkt.east.wctype.com:8300
+anytls://c870fe5a-0729-11f0-8cf9-f23c93136cb3@76842b4a-tb71c0-tgprfk-ddgs.losjan20.west.wctype.com:8300
+anytls://06c625ea-5902-11ee-9e87-f23c9313b177@78fb080c-t9lmo0-tbomae-4mce.hkt.east.wctype.com:8300
+anytls://df7bed3c-06eb-11f0-8ebc-f23c93141fad@a2c1c42c-tb71c0-tee5aa-1glq.losjan20.west.wctype.com:8300
+anytls://c870fe5a-0729-11f0-8cf9-f23c93136cb3@abe6142c-tb71c0-tgprfk-ddgs.los.west.wctype.com:8300
+anytls://06c625ea-5902-11ee-9e87-f23c9313b177@d7772909-tb71c0-tbomae-4mce.losjan20.west.wctype.com:8300
+anytls://ae74dd32-c336-4be4-9c15-f6108292b3e5@us1.anliangjifei.top:12053
