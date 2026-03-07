@@ -123,11 +123,6 @@ def validate_vless(line):
     #if security not in ["tls", "reality"]:
     if security not in ["reality"]:
         return False
-
-    stealth_ports = {"443", "8443", "2053", "2083", "2087", "2096"}
-
-    if port not in stealth_ports:
-        return False
     
     if security == "reality":
         if not params.get("pbk") or not params.get("sni"):
