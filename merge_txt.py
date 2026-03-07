@@ -120,7 +120,8 @@ def validate_vless(line):
         return False
 
     security = params.get("security", [""])[0].lower()
-    if security not in ["tls", "reality"]:
+    #if security not in ["tls", "reality"]:
+    if security not in ["reality"]:
         return False
 
     if security == "reality":
@@ -167,7 +168,7 @@ def validate_vmess(line):
         if cipher not in ALLOWED_VM_CIPHERS:
             return False
 
-        if tls_val not in ["tls", "reality"] and security not in ["tls", "reality"]:
+        if tls_val not in ["reality"] and security not in ["reality"]:
             return False
 
         return port_open(host, port)
@@ -197,7 +198,7 @@ def validate_trojan(line):
         return False
 
     security = params.get("security", ["tls"])[0].lower()
-    if security not in ["tls", "reality"]:
+    if security not in ["reality"]:
         return False
 
     return port_open(host, port)
@@ -254,8 +255,8 @@ def filter_line(line):
     if line.startswith("trojan://"):
         return validate_trojan(line)
 
-    if line.startswith("ss://"):
-        return validate_ss(line)
+    #if line.startswith("ss://"):
+        #return validate_ss(line)
 
     return False
 
