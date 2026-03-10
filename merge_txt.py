@@ -39,25 +39,11 @@ ALLOWED_VM_CIPHERS = [
 
 ALLOWED_ALPN = ["h2", "http/1.1"]
 WEAK_PORTS = {"21", "23", "25", "110"}
-MAX_PING_MS = 800
+
 OUTPUT_FILE = "merged_proxies.txt"
 
 # ---------------- УТИЛИТЫ ----------------
-def tcp_ping(host, port):
-    try:
-        start = datetime.now()
 
-        with socket.create_connection((host, int(port)), timeout=3):
-            pass
-
-        end = datetime.now()
-
-        latency = (end - start).total_seconds() * 1000
-        return latency
-
-    except:
-        return None
-        
 def is_valid_uuid(val):
     try:
         uuid.UUID(val)
@@ -114,15 +100,11 @@ def is_valid_domain(host):
     return host and "." in host and not host.replace(".", "").isdigit()
 
 def port_open(host, port):
-    ping = tcp_ping(host, port)
-
-    if ping is None:
-        return None
-
-    if ping > MAX_PING_MS:
-        return None
-
-    return ping
+    try:
+        with socket.create_connection((host, int(port)), timeout=3):
+            return True
+    except:
+        return False
 
 def fetch_content(url):
     try:
@@ -166,10 +148,7 @@ def validate_simple_proxy(line):
         if is_private_ip(host):
             return False
 
-        ping = port_open(host, port)
-        if ping is None:
-            return False
-        return ping
+        return port_open(host, port)
 
     except:
         return False
@@ -213,10 +192,7 @@ def validate_vless(line):
     if alpn and alpn not in ALLOWED_ALPN:
         return False
 
-    ping = port_open(host, port)
-    if ping is None:
-        return False
-    return ping
+    return port_open(host, port)
 
 # ---------- VMESS ----------
 
@@ -255,10 +231,7 @@ def validate_vmess(line):
         if tls_val not in ["reality"] and security not in ["reality"]:
             return False
 
-        ping = port_open(host, port)
-        if ping is None:
-            return False
-        return ping
+        return port_open(host, port)
 
     except:
         return False
@@ -288,10 +261,7 @@ def validate_trojan(line):
     if security not in ["reality"]:
         return False
 
-    ping = port_open(host, port)
-    if ping is None:
-        return False
-    return ping
+    return port_open(host, port)
 
 # ---------- SHADOWSOCKS ----------
 
@@ -321,10 +291,7 @@ def validate_ss(line):
         if is_private_ip(host):
             return False
 
-        ping = port_open(host, port)
-        if ping is None:
-            return False
-        return ping
+        return port_open(host, port)
 
     except:
         return False
@@ -373,12 +340,7 @@ def main():
         all_lines.extend(fetch_content(url))
 
     print("Фильтрация...")
-    filtered = []
-
-    for line in all_lines:
-        ping = filter_line(line)
-        if ping:
-            filtered.append((ping, line))
+    filtered = [line for line in all_lines if filter_line(line)]
 
     unique = {}
     for line in filtered:
