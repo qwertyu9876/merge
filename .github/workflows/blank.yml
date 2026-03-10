@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install requests python-v2ray
-          bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
+          root bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
 
       - name: Run merge script
         run: python merge_txt.py
