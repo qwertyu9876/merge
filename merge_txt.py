@@ -94,6 +94,28 @@ def contains_target_flag(line):
 
     return any(flag in unquote(line) for flag in TARGET_FLAGS)
 
+def validate_simple_proxy(line):
+    try:
+        parsed = urlparse(line)
+
+        host = parsed.hostname
+        port = str(parsed.port) if parsed.port else None
+
+        if not host or not port:
+            return False
+
+        if port in WEAK_PORTS:
+            return False
+
+        if is_private_ip(host):
+            return False
+
+        return port_open(host, port)
+
+    except:
+        return False
+
+
 # ---------- VLESS ----------
 
 def validate_vless(line):
@@ -246,6 +268,18 @@ def filter_line(line):
     if not contains_target_flag(line):
         return False
 
+    if line.startswith("hy2://"):
+        return validate_simple_proxy(line)
+    
+    if line.startswith("hysteria2://"):
+        return validate_simple_proxy(line)
+
+    if line.startswith("tuic://"):
+        return validate_simple_proxy(line)
+
+    if line.startswith("juicity://"):
+        return validate_simple_proxy(line)
+    
     if line.startswith("vless://"):
         return validate_vless(line)
 
