@@ -39,7 +39,7 @@ ALLOWED_VM_CIPHERS = [
 
 ALLOWED_ALPN = ["h2", "http/1.1"]
 WEAK_PORTS = {"21", "23", "25", "110"}
-
+TEST_URL = "https://www.google.com/generate_204"
 OUTPUT_FILE = "merged_proxies.txt"
 
 # ---------------- УТИЛИТЫ ----------------
