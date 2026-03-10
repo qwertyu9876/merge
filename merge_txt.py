@@ -57,7 +57,45 @@ def is_private_ip(host):
         return ip.is_private
     except:
         return False
+        
+def udp_port_open(host, port):
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        sock.settimeout(3)
 
+        sock.sendto(b"ping", (host, int(port)))
+
+        try:
+            sock.recvfrom(1024)
+        except socket.timeout:
+            pass
+
+        sock.close()
+        return True
+    except:
+        return False
+        
+def validate_udp_proxy(line):
+    try:
+        parsed = urlparse(line)
+
+        host = parsed.hostname
+        port = str(parsed.port) if parsed.port else None
+
+        if not host or not port:
+            return False
+
+        if port in WEAK_PORTS:
+            return False
+
+        if is_private_ip(host):
+            return False
+
+        return udp_port_open(host, port)
+
+    except:
+        return False
+        
 def is_valid_domain(host):
     return host and "." in host and not host.replace(".", "").isdigit()
 
@@ -268,17 +306,8 @@ def filter_line(line):
     if not contains_target_flag(line):
         return False
 
-    if line.startswith("hy2://"):
-        return validate_simple_proxy(line)
-    
-    if line.startswith("hysteria2://"):
-        return validate_simple_proxy(line)
-
-    if line.startswith("tuic://"):
-        return validate_simple_proxy(line)
-
-    if line.startswith("juicity://"):
-        return validate_simple_proxy(line)
+    if line.startswith(("hysteria2://", "hy2://", "tuic://", "juicity://")):
+        return validate_udp_proxy(line)
     
     if line.startswith("vless://"):
         return validate_vless(line)
