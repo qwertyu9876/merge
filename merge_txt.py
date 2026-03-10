@@ -6,7 +6,9 @@ import uuid
 import ipaddress
 from urllib.parse import urlparse, parse_qs, unquote
 from datetime import datetime
-from v2ray import V2Ray
+from python_v2ray.downloader import BinaryDownloader
+from python_v2ray.tester import ConnectionTester
+from python_v2ray.config_parser import parse_uri
 import tempfile
 import subprocess
 
