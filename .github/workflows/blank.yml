@@ -19,7 +19,9 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install requests python-v2ray
+        run: |
+          pip install requests python-v2ray
+          sudo apt install xray
 
       - name: Run merge script
         run: python merge_txt.py
