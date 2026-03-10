@@ -6,11 +6,6 @@ import uuid
 import ipaddress
 from urllib.parse import urlparse, parse_qs, unquote
 from datetime import datetime
-from python_v2ray.downloader import BinaryDownloader
-from python_v2ray.tester import ConnectionTester
-from python_v2ray.config_parser import parse_uri
-import tempfile
-import subprocess
 
 # ---------------- НАСТРОЙКИ ----------------
 
@@ -48,55 +43,6 @@ TEST_URL = "https://www.google.com/generate_204"
 OUTPUT_FILE = "merged_proxies.txt"
 
 # ---------------- УТИЛИТЫ ----------------
-
-TEST_URL = "https://www.google.com"
-XRAY_PATH = "/usr/local/bin/xray"   # путь к xray
-
-def validate_with_v2ray(proxy_uri):
-    try:
-
-        config = {
-            "log": {"loglevel": "warning"},
-            "inbounds": [{
-                "port": 10808,
-                "listen": "127.0.0.1",
-                "protocol": "socks",
-                "settings": {"udp": True}
-            }],
-            "outbounds": [{
-                "protocol": "vless",
-                "settings": {},
-                "streamSettings": {}
-            }]
-        }
-
-        # python-v2ray умеет конвертировать URI
-        v2 = V2Ray(
-            exec_path=XRAY_PATH,
-            config=config,
-            uri=proxy_uri
-        )
-
-        v2.start()
-
-        proxies = {
-            "http": "socks5://127.0.0.1:10808",
-            "https": "socks5://127.0.0.1:10808",
-        }
-
-        try:
-            r = requests.get(TEST_URL, proxies=proxies, timeout=8)
-            ok = r.status_code == 200
-        except:
-            ok = False
-
-        v2.stop()
-
-        return ok
-
-    except:
-        return False
-
 
 def is_valid_uuid(val):
     try:
@@ -246,11 +192,7 @@ def validate_vless(line):
     if alpn and alpn not in ALLOWED_ALPN:
         return False
 
-
-    if not port_open(host, port):
-        return False
-
-    return validate_with_v2ray(line)
+    return port_open(host, port)
 
 # ---------- VMESS ----------
 
@@ -289,10 +231,7 @@ def validate_vmess(line):
         if tls_val not in ["reality"] and security not in ["reality"]:
             return False
 
-        if not port_open(host, port):
-            return False
-    
-        return validate_with_v2ray(line)
+        return port_open(host, port)
 
     except:
         return False
@@ -322,10 +261,7 @@ def validate_trojan(line):
     if security not in ["reality"]:
         return False
 
-    if not port_open(host, port):
-        return False
-    
-    return validate_with_v2ray(line)
+    return port_open(host, port)
 
 # ---------- SHADOWSOCKS ----------
 
