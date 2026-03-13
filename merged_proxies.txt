@@ -1,4 +1,4 @@
-hysteria2://dongtaiwang.com@62.210.124.146:22000/?insecure=1&sni=www.microsoft.com#%F0%9F%87%AB%F0%9F%87%B7%20France%20%7C%20%F0%9F%8C%90%20%7C%20%5BIPv6%5D%20%7C%20%5BBL%5D
+
 hysteria2://hysteria2_fastlane_1i6h1l4sl%3ANoN480zbmvyftOY9oApbob7BLPrpJrEn@150.241.78.128:1935?sni=de3.h.fastlanehosting.ru#%F0%9F%87%A8%F0%9F%87%AD%20Switzerland%2C%20Bern%20%7C%20%F0%9F%8C%90%20%7C%20%5BIPv6%5D%20%7C%20%5BBL%5D
 hysteria2://hysteria2_fastlane_1i6h1l4sl:NoN480zbmvyftOY9oApbob7BLPrpJrEn@150.241.78.128:1935/?sni=de3.h.fastlanehosting.ru#%F0%9F%87%A8%F0%9F%87%AD%20Switzerland%2C%20Bern%20%7C%20%F0%9F%8C%90%20%7C%20%5BIPv6%5D%20%7C%20%5BBL%5D
 hysteria2://hysteria2_fastlane_62hxzxhw6%3AgpjapMeYWiBsDR3KEun6DrwY0Is3gXay@150.241.78.128:1935/?sni=de3.h.fastlanehosting.ru#%F0%9F%87%A8%F0%9F%87%AD%20Switzerland%2C%20Bern%20%7C%20%F0%9F%8C%90%20%7C%20%5BIPv6%5D%20%7C%20%5BBL%5D
