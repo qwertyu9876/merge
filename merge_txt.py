@@ -9,6 +9,8 @@ SUB_URLS = [
 "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/BLACK_SS+All_RUS.txt",
 "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-CIDR-RU-all.txt",
 "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/WHITE-SNI-RU-all.txt",
+"https://github.com/WhitePrime/xraycheck/raw/refs/heads/main/configs/available",
+"https://github.com/WhitePrime/xraycheck/raw/refs/heads/main/configs/white-list_available",
 "https://github.com/LalatinaHub/Mineral/raw/refs/heads/master/result/nodes",
 "https://github.com/4n0nymou3/multi-proxy-config-fetcher/raw/refs/heads/main/configs/proxy_configs.txt",
 "https://github.com/freefq/free/raw/refs/heads/master/v2",
