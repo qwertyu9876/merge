@@ -109,23 +109,12 @@ def is_xhttp_reality(link):
 
 
 def is_shadowtls(link):
-    if not link.startswith("vless://"):
-        return False
+    return link.startswith("shadowtls://")
 
-    try:
-        params = parse_qs(urlparse(link).query)
 
-        if "shadowtls" in params:
-            return True
-
-        plugin = params.get("plugin", [""])[0].lower()
-        security = params.get("security", [""])[0].lower()
-
-        return "shadow" in plugin or security == "shadowtls"
-
-    except:
-        return False
-
+def is_tt(link):
+    return link.startswith("tt://")
+    
 
 def is_hysteria2(link):
     return link.startswith("hy2://") or link.startswith("hysteria2://")
@@ -137,6 +126,10 @@ def is_tuic(link):
 
 def is_naive(link):
     return link.startswith("naive+https://")
+
+
+def is_juicity(link):
+    return link.startswith("juicity://")
 
 
 async def fetch_subscription(session, url):
@@ -200,6 +193,8 @@ async def main():
                     or is_hysteria2(link)
                     or is_tuic(link)
                     or is_naive(link)
+                    or is_tt(link)
+                    or is_juicity(link)
                 ):
                     continue
 
