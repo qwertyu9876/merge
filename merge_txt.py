@@ -77,18 +77,79 @@ def try_decode_base64(data: str):
 
 
 def extract_host_port(link: str):
+
     try:
+
+        # VMESS
         if link.startswith("vmess://"):
             payload = link.replace("vmess://", "")
             payload += "=" * (-len(payload) % 4)
-            data = json.loads(base64.b64decode(payload).decode())
-            return data.get("add"), int(data.get("port"))
 
+            data = json.loads(base64.b64decode(payload).decode())
+
+            host = data.get("add")
+            port = data.get("port")
+
+            if host and port:
+                return host, int(port)
+
+
+        # SHADOWTLS
+        if link.startswith("shadowtls://"):
+
+            parsed = urlparse(link)
+
+            if parsed.hostname and parsed.port:
+                return parsed.hostname, parsed.port
+
+            # fallback
+            if "@" in parsed.netloc:
+                hostport = parsed.netloc.split("@")[-1]
+
+                if ":" in hostport:
+                    host, port = hostport.split(":", 1)
+                    return host, int(port)
+
+
+        # TUIC
+        if link.startswith("tuic://"):
+
+            parsed = urlparse(link)
+
+            if parsed.hostname and parsed.port:
+                return parsed.hostname, parsed.port
+
+            if "@" in parsed.netloc:
+                hostport = parsed.netloc.split("@")[-1]
+
+                if ":" in hostport:
+                    host, port = hostport.split(":", 1)
+                    return host, int(port)
+
+
+        # JUICITY
+        if link.startswith("juicity://"):
+
+            parsed = urlparse(link)
+
+            if parsed.hostname and parsed.port:
+                return parsed.hostname, parsed.port
+
+            if "@" in parsed.netloc:
+                hostport = parsed.netloc.split("@")[-1]
+
+                if ":" in hostport:
+                    host, port = hostport.split(":", 1)
+                    return host, int(port)
+
+
+        # остальные URI
         parsed = urlparse(link)
+
         if parsed.hostname and parsed.port:
             return parsed.hostname, parsed.port
 
-    except:
+    except Exception:
         pass
 
     return None, None
